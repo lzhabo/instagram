@@ -1,61 +1,86 @@
 import React from 'react';
-import logo from '../assets/logo.svg';
 import styled from '@emotion/styled'
+import Header from './Header'
+import Footer from './Footer'
+import Stories from './Stories'
+import Post from './Post'
+import { IPost, IUser, IComment } from '../interfaces';
+import { randomInteger } from '../utils';
+import { injectGlobal } from 'emotion'
+import sfuiBold from "../fonts/SFUIText-Bold.ttf";
+import sfui from "../fonts/SFUIText-Regular.ttf";
+
+//todo install normalize.css
+
+
+injectGlobal`
+  * {
+    box-sizing: border-box;
+  }
+  @font-face {
+    font-family: "SF UI Text";
+    font-weight: bold;
+    src: url(${sfuiBold});
+  }
+  @font-face {
+    font-family: "SF UI Text";
+    src: url(${sfui});
+  }
+`
 
 const Root = styled.div`
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  font-family: SF UI Text;
+  height: 100vh;
 `
 
-const Header = styled.header`
-  background-color: #282c34;
-  min-height: 100vh;
+const Layout = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  max-width: 414px;
+  flex: 1;
 `
 
-const LogoContainer = styled.img`
-  height: 40vmin;
-  pointer-events: none;
-  @media (prefers-reduced-motion: no-preference) {
-    animation: App-logo-spin infinite 20s linear;
-  }
-
-  @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+const ScrollContainer = styled.div`
+overflow-y: auto;
 `
 
-const Link = styled.a`
-  color: #61dafb;
-`
-
-function App() {
+const App: React.FC = () => {
   return (
     <Root>
-      <Header>
-        <LogoContainer src={logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Link
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </Link>
-      </Header>
+      <Layout>
+        <ScrollContainer >
+          <Header />
+          <Stories users={users} />
+          {posts.map((post, index) => <Post post={post} key={index} />)}
+        </ScrollContainer>
+        <Footer/>
+      </Layout>
     </Root>
   );
 }
+
+const loremIpsum = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+
+const users: IUser[] = Array.from({ length: randomInteger(1, 20) }, () =>
+  ({ avatar: 'https://i.pravatar.cc/300', name: 'name' })
+)
+
+const commentsData: IComment[] = Array.from({ length: randomInteger(1, 5) }, () =>
+  ({ user: users[randomInteger(1, users.length - 1)], content: loremIpsum })
+)
+
+const posts: IPost[] = Array.from({ length: randomInteger(10, 20) },
+  () => ({
+    user: users[randomInteger(1, users.length - 1)],
+    photo: 'https://i.pravatar.cc/300',
+    location: "Somewhere",
+    likes: Math.random() * 2000,
+    description: loremIpsum,
+    comments: commentsData
+  }))
+
+
 
 export default App;
