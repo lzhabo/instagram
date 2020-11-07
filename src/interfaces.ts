@@ -11,5 +11,11 @@ export interface IPost {
   location: string;
   likes: number;
   description: string;
-  comments: string[];
 }
+
+export interface IComment {
+  _id: string;
+  content: string,
+  user: IUser
+}
+

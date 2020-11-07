@@ -9,6 +9,7 @@ import sfui from "./fonts/SFUIText-Regular.ttf";
 import { useObserver } from "mobx-react-lite";
 import { useStores } from "@stores";
 import Loading from "@components/Loading";
+import Posts from "@components/Posts";
 
 injectGlobal`
   * {
@@ -47,16 +48,14 @@ const App: React.FC = () => {
   const rootStore = useStores();
   const initialized = useObserver(() => rootStore.initialized);
   console.log(initialized);
-  if (!initialized) return  <Root><Loading /></Root>;
+  if (!initialized) return <Root><Loading /></Root>;
   return (
     <Root>
       <Layout>
         <ScrollContainer>
           <Header />
           <Stories />
-          {/*{posts.map((post, index) => (*/}
-          {/*  <Post post={post} key={index} />*/}
-          {/*))}*/}
+          <Posts />
         </ScrollContainer>
         <Footer />
       </Layout>

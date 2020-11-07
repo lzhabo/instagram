@@ -6,7 +6,8 @@ import { IUser } from "../interfaces";
 type TUpdateUserParams = Omit<IUser, "_id">;
 
 export default {
-  users: (): Promise<IUser[]> => apiService.makeApiRequest(`api/v1/users`),
+  // users: (): Promise<IUser[]> => apiService.makeApiRequest(`api/v1/users`),
+  users: async (): Promise<IUser[]> => require('./usersDefaultData.json'),
 
   user: (id: string): Promise<IUser> =>
     apiService.makeApiRequest(`api/v1/users/${id}`),

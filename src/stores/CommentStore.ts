@@ -1,8 +1,7 @@
 import { RootStore } from "./index";
 import { action, observable, runInAction } from "mobx";
-import { IPost } from "../interfaces";
-import postsService from "@services/postsService";
-
+import { IComment } from "../interfaces";
+import commentsService from "@services/commentsService";
 export default class PostStore {
   rootStore: RootStore;
 
@@ -11,12 +10,12 @@ export default class PostStore {
   }
 
   @observable initialised = false;
-  @observable posts: IPost[] = [];
+  @observable comments: IComment[] = [];
 
   @action sync = async () => {
-    const posts = await postsService.posts();
+    const comments = await commentsService.comments();
     runInAction(() => {
-      this.posts = posts;
+      this.comments = comments;
       this.initialised = true;
     });
     console.log(this.initialised);

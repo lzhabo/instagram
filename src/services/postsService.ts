@@ -6,7 +6,8 @@ import { IPost } from "../interfaces";
 type TUpdatePostParams = Omit<IPost, "_id">;
 
 export default {
-  posts: (): Promise<IPost[]> => apiService.makeApiRequest(`api/v1/posts`),
+  // posts: (): Promise<IPost[]> => apiService.makeApiRequest(`api/v1/posts`),
+  posts: async (): Promise<IPost[]> => require('./postsDefaultData.json'),
 
   post: (id: string): Promise<IPost> =>
     apiService.makeApiRequest(`api/v1/posts/${id}`),

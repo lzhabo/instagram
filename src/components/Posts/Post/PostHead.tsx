@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { IUser } from "../../interfaces";
-import menu from "../../assets/menu.svg";
+import { IPost } from "../../../interfaces";
+import menu from "../../../assets/menu.svg";
 interface IProps {
-  user: IUser;
-  location: string;
+  post: IPost;
 }
 
 const Root = styled.div`
@@ -49,14 +48,15 @@ const NameContainer = styled.div`
   }
 `;
 
-const PostHead: React.FC<IProps> = ({ user: { avatar, name }, location }) => {
+const PostHead: React.FC<IProps> = ({ post}) => {
+  console.log(post);
   return (
     <Root>
       <NameContainer>
-        <Img alt="avatar" src={avatar} />
+        <Img alt="avatar" src={post.user.avatar} />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <Name>{name}</Name>
-          <Location>{location}</Location>
+          <Name>{post.user.name}</Name>
+          <Location>{post.location}</Location>
         </div>
       </NameContainer>
 

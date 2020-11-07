@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { IPost } from "../../interfaces";
+import { IPost , IComment} from "@src/interfaces";
 import PostHead from "./PostHead";
 import PostFooter from "./PostFooter";
 
 interface IProps {
   post: IPost;
+  comments: IComment[];
 }
 
 const Root = styled.div`
@@ -19,12 +20,13 @@ const PostPic = styled.img`
   height: 375px;
 `;
 
-const Post: React.FC<IProps> = ({ post }) => {
+const Post: React.FC<IProps> = ({ post , comments}) => {
+  console.log(comments);
   return (
     <Root>
-      <PostHead user={post.user} location={post.location} />
+      <PostHead post={post} />
       <PostPic src={post.photo} />
-      <PostFooter post={post} />
+      <PostFooter post={post} comments={comments} />
     </Root>
   );
 };
