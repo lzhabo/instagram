@@ -10,6 +10,7 @@ import { useObserver } from "mobx-react-lite";
 import { useStores } from "@stores";
 import Loading from "@components/Loading";
 import Posts from "@components/Posts";
+import HomePage from "@components/HomePage";
 
 injectGlobal`
   * {
