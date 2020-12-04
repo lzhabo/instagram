@@ -53,13 +53,12 @@ const App: React.FC = () => {
   return (
     <Root>
       <Layout>
-        {/* <ScrollContainer>
+        <ScrollContainer>
           <Header />
           <Stories />
           <Posts />
         </ScrollContainer>
-        <Footer /> */}
-        <HomePage/>
+        <Footer />
       </Layout>
     </Root>
   );
