@@ -19,6 +19,7 @@ const Image = styled.img`
   cursor: pointer;
 `;
 
+
 const Header: React.FC = () => (
   <Root>
     <Image src={camera} alt="camera" />
